@@ -50,21 +50,79 @@ body {
     border-radius: pxToRem(22px) pxToRem(22px) pxToRem(99px) pxToRem(22px);
     padding: pxToRem(42px) pxToRem(24px);
     max-width: pxToRem(760px);
+    gap: pxToRem(32px);
 
     overflow: hidden;
     background-color: $white;
 
     form {
+        display: flex;
+        gap: pxToRem(16px);
 
-        border-bottom: 2px solid $light-grey;
+        label {
+            font-size: pxToRem(12px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: $smokey-grey;
 
+            display: flex;
+            flex-direction: column;
+            gap:pxToRem(2px);
+
+            input, select{
+                font-size: pxToRem(18px);
+                width: 100%;
+                border: 1px solid $light-grey;
+                border-radius: pxToRem(8px);
+                padding: pxToRem(12px) pxToRem(12px);
+            }
+        }
+    }
+
+    .divider {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        hr {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            
+            background-color: $light-grey; 
+            height: 1px; 
+            border: 0;
+        }
+
+        button {
+            position: relative;
+
+            background-color: $purple;
+            border-radius: 50%;
+            border: none;
+
+            width: pxToRem(64px);
+            aspect-ratio: 1 / 1;
+            padding: pxToRem(12px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 65%;
+                aspect-ratio: 1 / 1;
+            }
+        }
     }
 
     .results {
         font-weight: 800;
         font-size: pxToRem(48px);
         font-style: italic;
-        line-height: 100%;
+        line-height: 110%;
 
         span {
             color: $purple
