@@ -1,0 +1,74 @@
+@use "sass:math";
+
+@function pxToRem($px){
+    @return math.div($px, 16px) * 1rem;
+}
+
+$black1: #0B0B0B;
+
+$purple: hsl(259, 100%, 65%);
+$red: hsl(0, 100%, 67%);
+
+$white: hsl(0, 0%, 100%);
+$off-white: hsl(0, 0%, 94%);
+$light-grey: hsl(0, 0%, 86%);
+$smokey-grey: hsl(0, 1%, 44%);
+$off-black: hsl(0, 0%, 8%);
+
+
+/* simple css reset*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+/* */
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: pxToRem(32px);
+    font-weight: 500;
+    min-height: 100vh;
+    padding: pxToRem(88px) pxToRem(16px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $off-white;
+
+    main {
+    
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: pxToRem(22px) pxToRem(22px) pxToRem(99px) pxToRem(22px);
+    padding: pxToRem(42px) pxToRem(24px);
+    max-width: pxToRem(760px);
+
+    overflow: hidden;
+    background-color: $white;
+
+    form {
+
+        border-bottom: 2px solid $light-grey;
+
+    }
+
+    .results {
+        font-weight: 800;
+        font-size: pxToRem(48px);
+        font-style: italic;
+        line-height: 100%;
+
+        span {
+            color: $purple
+        }
+    }
+}
+
