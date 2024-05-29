@@ -47,16 +47,16 @@ body {
     background-color: $off-white;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: pxToRem(32px);
+    font-size: #{fluid(24px, 32px)} // TODO: make responsive
 }
 
 .card {
     background-color: $white;
     @include set-box-shadow();
-    border-radius: pxToRem(22px) pxToRem(22px) #{fluid(100px, 200px)};
-    width: clamp(260px, 90vw ,840px);
-    max-width: pxToRem(840px);
-    padding: 1.2em;
+    max-width: pxToRem(840px); // ====
+    width: 90vw; // ===?
+    padding: pxToRem(50px) #{fluid(20px, 50px)}; // ===?
+    border-radius: pxToRem(22px) pxToRem(22px) #{fluid(100px, 200px)}; // ====
     overflow: hidden;
 
     display: flex;
@@ -66,49 +66,54 @@ body {
         font-weight: 700;
 
         display: flex;
-        gap: 1em;//?
+        gap: 0.8em;
 
         label {
-            font-size: pxToRem(12px);
             color: $smokey-grey;
+            font-size: #{fluid(12px, 13px)}; // ==
             text-transform: uppercase;
-            letter-spacing: pxToRem(2px);
-
+            letter-spacing: pxToRem(4px); // ==
+            max-width: 160px; // ==
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1em;
+            gap: 0.8em; // ==
 
             input, select {
-                font-size: 28px;
-                max-width: 160px;
-                border: 1px solid $light-grey;
+                font-size: #{fluid(18px, 28px)}; // ==
+                width: 100%;
+                border: pxToRem(1px) solid $light-grey;
                 border-radius: 0.3em;
-                padding: 0.3em 0.5em;
+                padding: /* 0.3em */ 0.5em;
             }
 
             .placeholder {
-                color: $light-grey;
+                color: $light-grey;  // ???
             }
         }
     }
 
     .divider {
         position: relative;
+        /* margin-bottom: 0.5em; */
         @include flex-n-center();
+        justify-content: end;
 
         hr {
+            position: absolute;
             width: 100%;
-            background-color: $light-grey; 
+            background-color: $light-grey;
             height: 1px; 
             border: 0;
         };
 
         button {
+            position: relative;
             background-color: $purple;
             border-radius: 50%;
             border: none;
 
-            width: 98px;
+            width: #{fluid(66px, 98px)}; // ====
             aspect-ratio: 1 / 1;
             padding: pxToRem(12px);
 
@@ -122,13 +127,44 @@ body {
     }
 
     .results {
-        font-size: 3.5em;
+        font-size: #{fluid(48px, 98px)}; // ====
         font-weight: 800;
         font-style: italic;
-        line-height: 110%;
+        line-height: 115%;
 
         span {
-            color: $purple
+            font-size: 1.1em;
+            color: $purple;
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+    body {
+        align-items: flex-start;
+        padding-top: 3em;
+    }
+
+    .card {
+        gap: 1.3em;
+
+        .divider {
+            margin: 0;
+            justify-content: center;
+        }
+    }
+}
+
+@media screen and (max-width: 312px) {
+    .card {
+        .results {
+            p {
+                margin-bottom: 0.5em;
+            }
+
+            span {
+                display: block;
+            }
         }
     }
 }
