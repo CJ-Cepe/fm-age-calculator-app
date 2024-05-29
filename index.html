@@ -20,12 +20,13 @@
 
         <label for="day">
           Day
-          <input id="day" name="day" type="number" min="1" max="31" required>
+          <input id="day" name="day" type="number" placeholder="DD" min="1" max="31" required>
         </label>
 
         <label for="month">
           Month
-          <select id="month" name="month" required>
+          <select id="month" name="month" placeholder="MM"  required>
+            <option value="" class="placeholder">MM</option>
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
@@ -43,29 +44,22 @@
 
         <label for="year">
           Year
-          <input id="year" name="year" type="number" min="1800" max="2024" required>
+          <input id="year" name="year" type="number" placeholder="YYYY" min="1800" max="2024" required>
         </label>
-
       </form>
+
+      <div class="divider">
+        <hr>
+        <button><img src="./assets/images/icon-arrow.svg" alt="arrow down"></button>
+      </div>
+
       <section class="results">
-        <p class="years"><span></span></p>
-        <p class="months"><span></span></p>
-        <p class="days"><span></span></p>
+        <p class="years"><span>38</span> years</p>
+        <p class="months"><span>3</span> months</p>
+        <p class="days"><span>26</span> days</p>
       </section>
     </article>
   </main>
-  Day
-  DD
-
-  Month
-  MM
-
-  Year
-  YYYY
-
-  -- years
-  -- months
-  -- days
   
 </body>
 </html>
