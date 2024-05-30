@@ -56,11 +56,10 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-size: #{fluid(24px, 32px)};
-
-    animation: gradient-anim 3s infinite;
-    background-size: 150%, 150%;
+    background-size: 200%, 200%;
     background-color: $bg-1;
     background-image: $bg-img-1;
+    animation: gradient-anim 3s infinite;
 }
 
 .card {
@@ -81,7 +80,7 @@ body {
 
     form {
         font-weight: 700;
-
+        
         display: flex;
         gap: 0.8em;
 
@@ -92,9 +91,17 @@ body {
             letter-spacing: pxToRem(4px); // ==
             max-width: 160px; // ==
             width: 100%;
+
             display: flex;
             flex-direction: column;
             gap: 0.8em; // ==
+
+            &:has(> input:focus),
+            &:has(> input:active),
+            &:has(> select:focus),
+            &:has(> select:active) {
+                color: $off-black;
+            }
 
             input, select {
                 background-color: transparent;
@@ -175,11 +182,6 @@ body {
 }
 
 @media screen and (max-width: 650px) {
-    body {
-        align-items: flex-start;
-        padding-top: 3em;
-    }
-
     .card {
         gap: 1.3em;
 
@@ -190,6 +192,10 @@ body {
 }
 
 @media screen and (max-width: 312px) {
+    body {
+        padding: 1em 0;
+    }
+
     .card {
         .results {
             p {
