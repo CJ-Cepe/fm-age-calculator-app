@@ -17,6 +17,7 @@ const elem = {
 }
 
 const currentDate = new Date();
+currentDate.setHours(0,0,0,0);
 
 elem.btn.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -26,18 +27,15 @@ elem.btn.addEventListener('click', (e)=>{
 
     if(isValidated) {
         const age = calculateAge(day, month, year);
-        displayAge(age.day, age.month, age.year);
+        displayAge(age);
     }
 });
 
+// =============== Extract =============== 
 function extractInputs(){
     const day = parseInt(elem.dayInput.value);
     const month = parseInt(elem.monthInput.value);
     const year = parseInt(elem.yearInput.value);
-
-    console.log(typeof day);
-    console.log(typeof month);
-    console.log(typeof year);
 
     return { day, month, year}
 }
@@ -81,7 +79,7 @@ function isValidMonth(month){
     } 
     
     if (month < 1 || month > 12) {
-        elem.monthVldMsg.textContent = "must be a valid month"
+        elem.monthVldMsg.textContent = "Must be a valid month"
         return false;
     }
     
@@ -98,18 +96,17 @@ function isValidYear(day, month, year){
     } 
     
     if (year < 1800) {
-        elem.yearVldMsg.textContent ="must be greater than 1800";
+        elem.yearVldMsg.textContent ="Must be greater than 1800";
         return false;
     }
 
     if (year > 2024) {
-        elem.yearVldMsg.textContent ="must be in the past";
+        elem.yearVldMsg.textContent ="Must be in the past";
         return false;
     }
 
     let inputDate = new Date(year, month - 1, day);
     inputDate.setHours(0,0,0,0);
-    currentDate.setHours(0,0,0,0);
     if (inputDate > currentDate) {
         elem.dayVldMsg.textContent = "Date cannot be in the future";
         elem.monthVldMsg.textContent = "Date cannot be in the future";
@@ -151,8 +148,17 @@ function calculateAge(inputDay, inputMonth, inputYear){
     }
 }
 
-function displayAge(day="--", month="--", year="--"){
-    elem.daySpan.textContent = day;
-    elem.monthSpan.textContent = month;
-    elem.yearSpan.textContent = year;
+// ===============Display =============== 
+
+function displayAge(present){
+    const past = {
+        day: parseInt(elem.daySpan.textContent),
+        month: parseInt(elem.monthSpan.textContent),
+        year: parseInt(elem.yearSpan.textContent)
+    }
+
+    animateCount(past.day, present.day, elem.daySpan);
+    animateCount(past.month, present.month, elem.monthSpan);
+    animateCount(past.year, present.year, elem.yearSpan);
 }
+
