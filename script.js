@@ -1,77 +1,136 @@
+const elem = {
+    btn: document.querySelector('button'),
 
-const btn = document.querySelector('button')
-const monthInput = document.querySelector('#month');
+    form: document.querySelector('#myForm'),
 
-monthInput.addEventListener('change', ()=>{
-    monthInput.value = monthInput.value;
-})
+    dayInput: document.querySelector('#day'),
+    monthInput: document.querySelector('#month'),
+    yearInput: document.querySelector('#year'),
 
-/* const dayInput = document.querySelector('.day');
-const monthInput = document.querySelector('.month');
-const yearInput = document.querySelector('.year'); */
+    dayVldMsg: document.querySelector('#day + .vld-msg'),
+    monthVldMsg: document.querySelector('#month + .vld-msg'),
+    yearVldMsg: document.querySelector('#year + .vld-msg'),
 
-/* const years = document.querySelector('.years > span');
-const months = document.querySelector('.months > span');
-const days = document.querySelector('.days > span'); */
+    daySpan: document.querySelector('.days > span'),
+    monthSpan: document.querySelector('.months > span'),
+    yearSpan: document.querySelector('.years > span'),
+}
 
+const currentDate = new Date();
 
-console.log("yup")
-
-btn.addEventListener('click', (e)=> {
+elem.btn.addEventListener('click', (e)=>{
     e.preventDefault();
-    //get input
-        //validate
-         // check input if not empty
-    //compute
-    //set change
 
-    const input = getInput();
-    const age = calculateAge(input.day, input.month, input.year);
-    displayAge(age.day, age.month, age.year);
-})
+    const {day, month, year} = extractInputs()
+    let isValidated = validateInputs(day, month, year);
 
-function displayAge(day="--", month="--", year="--"){
-    const yearSpan = document.querySelector('.years > span');
-    const monthSpan = document.querySelector('.months > span');
-    const daySpan = document.querySelector('.days > span');
-    
-    yearSpan.textContent = day;
-    monthSpan.textContent = month;
-    yearSpan.textContent = year;
-}
-
-function getInput(){
-    const dayInput = document.querySelector('#day');
-    const monthInput = document.querySelector('#month');
-    const yearInput = document.querySelector('#year');
-
-    /* let convertedMonth = convertMonth(monthInput) */
-    
-    return {
-        day: dayInput.value,
-        month: monthInput.value,
-        year: yearInput.value
+    if(isValidated) {
+        const age = calculateAge(day, month, year);
+        displayAge(age.day, age.month, age.year);
     }
+});
+
+function extractInputs(){
+    const day = parseInt(elem.dayInput.value);
+    const month = parseInt(elem.monthInput.value);
+    const year = parseInt(elem.yearInput.value);
+
+    console.log(typeof day);
+    console.log(typeof month);
+    console.log(typeof year);
+
+    return { day, month, year}
 }
 
-function convertMonth(month = ""){
-    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 
-    'august', 'september', 'october', 'november', 'december'];
+// =============== Validation =============== 
 
-    const index = months.indexOf(month.toLowerCase());
-
-    return index + 1;
+function validateInputs(day, month, year){
+    //validate Date
+    let a = isValidDay(day, month, year);
+    let b = isValidMonth(month); 
+    let c = isValidYear(day, month, year);
+    
+    return a && b && c;
 }
 
-function calculateAge(inputDay = 0, inputMonth = 0, inputYear = 0){
+function isValidDay(day, month, year){
+    if(day === "") {
+        elem.dayVldMsg.textContent = "This field is required"
+        return false;
+    } 
+    
+    if(day < 1 || day > 31) {
+        elem.dayVldMsg.textContent = "Must be a valid day"
+        return false;
+    } 
+   
+    let date = new Date(year, month - 1, day);
+    if(!(date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day)) {
+        elem.dayVldMsg.textContent = "Must be a valid date"
+        return false;
+    }
 
-    const past = new Date(inputYear, inputMonth - 1 ,inputDay);
-    const today = new Date();
+    elem.dayVldMsg.textContent = "" 
+    return true;
+}
+
+function isValidMonth(month){
+    if(month === "") {
+        elem.monthVldMsg.textContent = "This field is required"
+        return false;
+    } 
+    
+    if (month < 1 || month > 12) {
+        elem.monthVldMsg.textContent = "must be a valid month"
+        return false;
+    }
+    
+    elem.monthVldMsg.textContent = ""
+    return true;
+}
+
+
+function isValidYear(day, month, year){
+
+    if(year === "") {
+        elem.monthVldMsg.textContent ="This field is required"
+        return false;
+    } 
+    
+    if (year < 1800) {
+        elem.yearVldMsg.textContent ="must be greater than 1800";
+        return false;
+    }
+
+    if (year > 2024) {
+        elem.yearVldMsg.textContent ="must be in the past";
+        return false;
+    }
+
+    let inputDate = new Date(year, month - 1, day);
+    inputDate.setHours(0,0,0,0);
+    currentDate.setHours(0,0,0,0);
+    if (inputDate > currentDate) {
+        elem.dayVldMsg.textContent = "Date cannot be in the future";
+        elem.monthVldMsg.textContent = "Date cannot be in the future";
+        elem.yearVldMsg.textContent = "Date cannot be in the future";
+        return false;
+    }
+
+    elem.yearVldMsg.textContent = ""
+    return true;
+}
+
+// =============== Calculate Age =============== 
+
+function calculateAge(inputDay, inputMonth, inputYear){
+
+    const pastDate = new Date(inputYear, inputMonth - 1 ,inputDay);
 
     //compute day, month, year
-    let ageYear = today.getFullYear() - past.getFullYear();
-    let ageMonth = today.getMonth() - past.getMonth();
-    let ageDay = today.getDate() - past.getDate();
+    let ageYear = currentDate.getFullYear() - pastDate.getFullYear();
+    let ageMonth = currentDate.getMonth() - pastDate.getMonth();
+    let ageDay = currentDate.getDate() - pastDate.getDate();
 
     //adjust day, month, age
     if (ageDay < 0) {
@@ -90,41 +149,10 @@ function calculateAge(inputDay = 0, inputMonth = 0, inputYear = 0){
         month: ageMonth, 
         day: ageDay
     }
-
-    //handle negative valvs
 }
 
-
-//function calculate day
-
-
-
-
-   /*  const pastDay = past.getDate();
-    const pastMonth = past.getMonth();
-    const pastYear = past.getFullYear();
-
-   
-    const todayDay = today.getDate();
-    const todayMonth = today.getMonth();
-    const todayYear = today.getFullYear();
-
-    //calculate year
-    let ageYear = todayYear - pastYear;
-    if (todayMonth < pastMonth || (todayMonth === pastMonth && todayDay < pastDay)) {
-        ageYear--;
-    }
-
-    //calculate month
-    let ageMonth = todayMonth - pastMonth;
-    if (ageMonth < 0) {
-        ageMonth += 12;
-        ageYear--;
-    }
-    //calculate day
-    let ageDay = todayDay - pastDay;
-    if (ageDay < 0) {
-      ageDay += 30;
-      ageMonth--;
-    }
- */
+function displayAge(day="--", month="--", year="--"){
+    elem.daySpan.textContent = day;
+    elem.monthSpan.textContent = month;
+    elem.yearSpan.textContent = year;
+}
