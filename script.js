@@ -151,11 +151,7 @@ function calculateAge(inputDay, inputMonth, inputYear){
 // ===============Display =============== 
 
 function displayAge(present){
-    const past = {
-        day: parseInt(elem.daySpan.textContent),
-        month: parseInt(elem.monthSpan.textContent),
-        year: parseInt(elem.yearSpan.textContent)
-    }
+    const past = getSpanContent();
 
     animateCount(past.day, present.day, elem.daySpan);
     animateCount(past.month, present.month, elem.monthSpan);
@@ -179,4 +175,12 @@ function animateCount(from, to, span){
             clearInterval(counter);
         }
     }, interval)
+}
+
+function getSpanContent(){
+    let day = isNaN(parseInt(elem.daySpan.textContent)) ? 0 : parseInt(elem.daySpan.textContent);
+    let month = isNaN(parseInt(elem.monthSpan.textContent)) ? 0 : parseInt(elem.monthSpan.textContent);
+    let year = isNaN(parseInt(elem.yearSpan.textContent)) ? 0 : parseInt(elem.yearSpan.textContent);
+    
+    return {day, month, year}
 }
