@@ -162,3 +162,21 @@ function displayAge(present){
     animateCount(past.year, present.year, elem.yearSpan);
 }
 
+function animateCount(from, to, span){
+    let step = to > from ? 1 : -1;
+    let interval = 50;
+
+    if (from === to) {
+        span.textContent = from
+        return;
+    }
+
+    let counter = setInterval(() => {
+        from += step;
+        span.textContent = from
+
+        if(from === to){
+            clearInterval(counter);
+        }
+    }, interval)
+}
