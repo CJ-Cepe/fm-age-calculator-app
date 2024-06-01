@@ -20,7 +20,8 @@
 
         <label for="day">
           Day
-          <input id="day" name="day" type="number" placeholder="DD" min="1" max="31" required>
+          <input id="day" name="day" type="number" placeholder="DD" min="1" max="31" pattern="[0-9]{1,2}" required>
+          <div class="vld-msg"></div>
         </label>
 
         <label for="month">
@@ -40,17 +41,19 @@
             <option value="11" label="Nov.">November</option>
             <option value="12" label="Dec.">December</option>
           </select>
+          <div class="vld-msg"></div>
         </label>
 
         <label for="year">
-          Year
-          <input id="year" name="year" type="number" placeholder="YYYY" min="1800" max="2024" required>
+          Year 
+          <input id="year" name="year" type="number" placeholder="YYYY" pattern="[0-9]{4}" min="1800" max="2024" required>
+          <div class="vld-msg"></div>
         </label>
       </form>
 
       <div class="divider">
         <hr>
-        <button form="myForm" ><img src="./assets/images/icon-arrow.svg" alt="arrow down"></button>
+        <button form="myForm" type="submit" ><img src="./assets/images/icon-arrow.svg" alt="arrow down"></button>
       </div>
 
       <section class="results">
