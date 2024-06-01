@@ -16,6 +16,7 @@ const elem = {
     yearSpan: document.querySelector('.years > span'),
 }
 
+let counter = null;
 const currentDate = new Date();
 currentDate.setHours(0,0,0,0);
 
@@ -162,12 +163,16 @@ function animateCount(from, to, span){
     let step = to > from ? 1 : -1;
     let interval = 50;
 
+    if(counter) {
+        clearInterval(counter);
+    }
+    
     if (from === to) {
         span.textContent = from
         return;
     }
 
-    let counter = setInterval(() => {
+    counter = setInterval(() => {
         from += step;
         span.textContent = from
 
