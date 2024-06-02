@@ -19,8 +19,6 @@ const elem = {
     yearSpan: document.querySelector('.years > span'),
 }
 
-
-
 const currentDate = new Date();
 currentDate.setHours(0,0,0,0);
 
@@ -81,8 +79,10 @@ function isValidDay(day, month, year){
    
     let date = new Date(year, month - 1, day);
     if(!(date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day)) {
-        elem.dayVldMsg.textContent = "Must be a valid date"
-        return false;
+        if(month && year) {
+            elem.dayVldMsg.textContent = "Must be a valid date"
+            return false;
+        }
     }
 
     elem.dayVldMsg.textContent = "" 
