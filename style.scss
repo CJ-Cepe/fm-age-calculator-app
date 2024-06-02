@@ -139,6 +139,26 @@ body {
                 height: 1em;
             }
         }
+
+        .error {
+            color: $red;
+
+            &:has(> input:focus),
+            &:has(> input:active),
+            &:has(> select:focus),
+            &:has(> select:active) {
+                color: $red;
+            }
+
+            input, select {
+                border-color: $red;
+
+                &:active, 
+                &:focus {
+                    outline-color: $red;
+                }
+            }
+        }
     }
 
     .divider {
@@ -250,7 +270,7 @@ body {
 
 - [x] give vldMessage height
 - [x] adjust option fs
-- [] adjust option default color
+- [x] adjust option default color
 - [] color red when error
 - [] adjust valdiation logic
 - [x] adjust layout when screen < 200px

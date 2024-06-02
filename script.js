@@ -2,6 +2,9 @@ const elem = {
     btn: document.querySelector('button'),
 
     form: document.querySelector('#myForm'),
+    dayLabel: document.querySelector('label[for="day"]'),
+    monthLabel: document.querySelector('label[for="month"]'),
+    yearLabel: document.querySelector('label[for="year"]'),
 
     dayInput: document.querySelector('#day'),
     monthInput: document.querySelector('#month'),
@@ -59,6 +62,8 @@ function validateInputs(day, month, year){
 }
 
 function isValidDay(day, month, year){
+    elem.dayLabel.classList.add("error");
+
     if(day === "") {
         elem.dayVldMsg.textContent = "This field is required"
         return false;
@@ -81,10 +86,13 @@ function isValidDay(day, month, year){
     }
 
     elem.dayVldMsg.textContent = "" 
+    elem.dayLabel.classList.remove("error");
     return true;
 }
 
 function isValidMonth(month){
+    elem.monthLabel.classList.add("error");
+
     if(month === "") {
         elem.monthVldMsg.textContent = "This field is required"
         return false;
@@ -101,11 +109,13 @@ function isValidMonth(month){
     }
     
     elem.monthVldMsg.textContent = ""
+    elem.monthLabel.classList.remove("error");
     return true;
 }
 
 
 function isValidYear(day, month, year){
+    elem.yearLabel.classList.add("error");
 
     if(year === "") {
         elem.yearVldMsg.textContent ="This field is required"
@@ -137,6 +147,7 @@ function isValidYear(day, month, year){
     }
 
     elem.yearVldMsg.textContent = ""
+    elem.yearLabel.classList.remove("error");
     return true;
 }
 
