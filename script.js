@@ -16,7 +16,8 @@ const elem = {
     yearSpan: document.querySelector('.years > span'),
 }
 
-let counter = null;
+
+
 const currentDate = new Date();
 currentDate.setHours(0,0,0,0);
 
@@ -150,21 +151,28 @@ function calculateAge(inputDay, inputMonth, inputYear){
 }
 
 // ===============Display =============== 
+const counter = {
+    day: null,
+    month: null,
+    year: null
+}
 
 function displayAge(present){
     const past = getSpanContent();
 
-    animateCount(past.day, present.day, elem.daySpan);
-    animateCount(past.month, present.month, elem.monthSpan);
-    animateCount(past.year, present.year, elem.yearSpan);
+    animateCount(past.day, present.day, elem.daySpan, "day");
+    animateCount(past.month, present.month, elem.monthSpan, "month");
+    animateCount(past.year, present.year, elem.yearSpan, "year");
 }
 
-function animateCount(from, to, span){
+function animateCount(from, to, span, key){
     let step = to > from ? 1 : -1;
-    let interval = 50;
+    let interval = 10;
 
-    if(counter) {
-        clearInterval(counter);
+    console.log(counter[key])
+
+    if(counter[key]) {
+        clearInterval(counter[key]);
     }
     
     if (from === to) {
@@ -172,12 +180,12 @@ function animateCount(from, to, span){
         return;
     }
 
-    counter = setInterval(() => {
+    counter[key] = setInterval(() => {
         from += step;
         span.textContent = from
 
         if(from === to){
-            clearInterval(counter);
+            clearInterval(counter[key]);
         }
     }, interval)
 }
