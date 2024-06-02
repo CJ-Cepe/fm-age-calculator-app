@@ -22,8 +22,7 @@ const currentDate = new Date();
 currentDate.setHours(0,0,0,0);
 
 elem.btn.addEventListener('click', (e)=>{
-    e.preventDefault();
-
+   /*  e.preventDefault(); */
     const {day, month, year} = extractInputs()
     let isValidated = validateInputs(day, month, year);
 
@@ -33,11 +32,17 @@ elem.btn.addEventListener('click', (e)=>{
     }
 });
 
+elem.form.addEventListener('submit', (e) => {
+    e.preventDefault();
+})
+
 // =============== Extract =============== 
 function extractInputs(){
-    const day = parseInt(elem.dayInput.value);
-    const month = parseInt(elem.monthInput.value);
-    const year = parseInt(elem.yearInput.value);
+    let day = elem.dayInput.value !== "" ? parseInt(elem.dayInput.value) : "";
+    let month = elem.monthInput.value !== "" ? parseInt(elem.monthInput.value) : "";
+    let year = elem.yearInput.value !== "" ? parseInt(elem.yearInput.value) : "";
+
+    console.log(elem.dayInput.value, elem.monthInput.value, elem.yearInput.value);
 
     return { day, month, year}
 }
@@ -59,6 +64,11 @@ function isValidDay(day, month, year){
         return false;
     } 
     
+    if(isNaN(day)){
+        elem.dayVldMsg.textContent = "Must be a valid day"
+        return false;
+    }
+
     if(day < 1 || day > 31) {
         elem.dayVldMsg.textContent = "Must be a valid day"
         return false;
@@ -79,6 +89,11 @@ function isValidMonth(month){
         elem.monthVldMsg.textContent = "This field is required"
         return false;
     } 
+
+    if(isNaN(month)){
+        elem.monthVldMsg.textContent = "Must be a valid month"
+        return false;
+    }
     
     if (month < 1 || month > 12) {
         elem.monthVldMsg.textContent = "Must be a valid month"
@@ -93,9 +108,14 @@ function isValidMonth(month){
 function isValidYear(day, month, year){
 
     if(year === "") {
-        elem.monthVldMsg.textContent ="This field is required"
+        elem.yearVldMsg.textContent ="This field is required"
         return false;
     } 
+
+    if(isNaN(year)){
+        elem.yearVldMsg.textContent = "Must be a valid year"
+        return false;
+    }
     
     if (year < 1800) {
         elem.yearVldMsg.textContent ="Must be greater than 1800";
