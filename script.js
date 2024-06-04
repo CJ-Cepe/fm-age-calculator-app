@@ -205,7 +205,16 @@ function calculateAge(inputDay, inputMonth, inputYear){
     const ageMonth = differenceInMonths(currentDate, pastDate);
     const ageDay = differenceInDays(currentDate, pastDate); */
 
-    const { years, months, days } = intervalToDuration({ start: pastDate, end: new Date()});
+    console.log(pastDate.getFullYear(), pastDate.getMonth(), pastDate.getDate())
+    const currentDate = new Date()
+    console.log(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())
+    const { years = 0, months = 0, days = 0 } = intervalToDuration({ start: pastDate, end: new Date()});
+    console.log(years, months, days)
+
+/*     years = years ? years : 0;
+    months = months ? months : 0;
+    days = days ? days : 0 */
+
 
 
     //return results
