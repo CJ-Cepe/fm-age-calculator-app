@@ -1,3 +1,5 @@
+import {intervalToDuration} from 'date-fns';
+
 const elem = {
     btn: document.querySelector('button'),
 
@@ -156,6 +158,30 @@ function isValidYear(day, month, year){
 function calculateAge(inputDay, inputMonth, inputYear){
 
     const pastDate = new Date(inputYear, inputMonth - 1 ,inputDay);
+ /*    pastDate.setHours(0, 0, 0, 0);
+
+    // Calculate difference in milliseconds
+    const ageDiffInMilliseconds = currentDate.getTime() - pastDate.getTime();
+
+
+     // Calculate whole years (consider average year length with leap years)
+  const years = Math.floor(ageDiffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
+
+   // Calculate remaining milliseconds after years are removed
+   const remainingTime = ageDiffInMilliseconds % (1000 * 60 * 60 * 24 * 365.25);
+
+   // Calculate whole months (consider 30 days per month on average)
+   const months = Math.floor(remainingTime / (1000 * 60 * 60 * 24 * 30));
+ 
+   // Calculate remaining milliseconds after months are removed
+   const remainingDays = remainingTime % (1000 * 60 * 60 * 24 * 30);
+ 
+   // Calculate whole days
+   const days = Math.floor(remainingDays / (1000 * 60 * 60 * 24)); */
+
+
+
+    /*
 
     //compute day, month, year
     let ageYear = currentDate.getFullYear() - pastDate.getFullYear();
@@ -171,14 +197,23 @@ function calculateAge(inputDay, inputMonth, inputYear){
     if (ageMonth < 0) {
         ageYear--;
         ageMonth += 12;
-    }
+    } 
+    
+    */
+
+    /* const ageYear = differenceInYears(currentDate, pastDate);
+    const ageMonth = differenceInMonths(currentDate, pastDate);
+    const ageDay = differenceInDays(currentDate, pastDate); */
+
+    const { years, months, days } = intervalToDuration({ start: pastDate, end: new Date()});
+
 
     //return results
-    return {
-        year: ageYear, 
-        month: ageMonth, 
-        day: ageDay
-    }
+    return { 
+        year: years, 
+        month: months, 
+        day: days 
+    } 
 }
 
 // ===============Display =============== 
