@@ -142,9 +142,7 @@ function isValidYear(day, month, year){
     let inputDate = new Date(year, month - 1, day);
     inputDate.setHours(0,0,0,0);
     if (inputDate > currentDate) {
-        elem.dayVldMsg.textContent = "Date cannot be in the future";
-        elem.monthVldMsg.textContent = "Date cannot be in the future";
-        elem.yearVldMsg.textContent = "Date cannot be in the future";
+        elem.yearVldMsg.textContent = "Must be in the past";
         return false;
     }
 
