@@ -219,7 +219,7 @@ body {
     }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .card {
         gap: 1.3em;
 
@@ -229,7 +229,7 @@ body {
     }
 }
 
-@media screen and (max-width: 312px) {
+@media screen and (max-width: 340px) {
     body {
         padding: 1em 0;
     }
@@ -267,12 +267,14 @@ body {
 
 
 /*
-
-- [x] give vldMessage height
-- [x] adjust option fs
-- [x] adjust option default color
-- [] color red when error
-- [] adjust valdiation logic
-- [x] adjust layout when screen < 200px
-
+    - [x] give vldMessage height
+    - [x] adjust option fs
+    - [x] adjust option default color
+    - [x] color red when error
+    - [x] adjust valdiation logic
+    - [x] adjust layout when screen < 200px
+    - [x] adjust leap year computation
+    - [x] adjust validation message for future input
+    - [x] vldMessage style, size, fit
+    - [] clean code
 */
