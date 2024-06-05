@@ -21,9 +21,6 @@ const elem = {
     yearSpan: document.querySelector('.years > span'),
 }
 
-const currentDate = new Date();
-currentDate.setHours(0,0,0,0);
-
 elem.btn.addEventListener('click', (e)=>{
    /*  e.preventDefault(); */
     const {day, month, year} = extractInputs()
@@ -41,23 +38,19 @@ elem.form.addEventListener('submit', (e) => {
 
 // =============== Extract =============== 
 function extractInputs(){
-    let day = elem.dayInput.value !== "" ? parseInt(elem.dayInput.value) : "";
-    let month = elem.monthInput.value !== "" ? parseInt(elem.monthInput.value) : "";
-    let year = elem.yearInput.value !== "" ? parseInt(elem.yearInput.value) : "";
-
-    console.log(elem.dayInput.value, elem.monthInput.value, elem.yearInput.value);
+    const day = elem.dayInput.value !== "" ? parseInt(elem.dayInput.value) : "";
+    const month = elem.monthInput.value !== "" ? parseInt(elem.monthInput.value) : "";
+    const year = elem.yearInput.value !== "" ? parseInt(elem.yearInput.value) : "";
 
     return { day, month, year}
 }
 
-// =============== Validation =============== 
-
+// =============== Validate =============== 
 function validateInputs(day, month, year){
-    //validate Date
-    let a = isValidDay(day, month, year);
-    let b = isValidMonth(month); 
-    let c = isValidYear(day, month, year);
-    
+    const a = isValidDay(day, month, year);
+    const b = isValidMonth(month); 
+    const c = isValidYear(day, month, year);
+
     return a && b && c;
 }
 
@@ -67,7 +60,7 @@ function isValidDay(day, month, year){
     if(day === "") {
         elem.dayVldMsg.textContent = "This field is required"
         return false;
-    } 
+    }
     
     if(isNaN(day)){
         elem.dayVldMsg.textContent = "Must be a valid day"
@@ -77,7 +70,7 @@ function isValidDay(day, month, year){
     if(day < 1 || day > 31) {
         elem.dayVldMsg.textContent = "Must be a valid day"
         return false;
-    } 
+    }
    
     let date = new Date(year, month - 1, day);
     if(!(date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day)) {
@@ -115,7 +108,6 @@ function isValidMonth(month){
     return true;
 }
 
-
 function isValidYear(day, month, year){
     elem.yearLabel.classList.add("error");
 
@@ -141,6 +133,10 @@ function isValidYear(day, month, year){
 
     let inputDate = new Date(year, month - 1, day);
     inputDate.setHours(0,0,0,0);
+
+    const currentDate = new Date();
+    currentDate.setHours(0,0,0,0);
+
     if (inputDate > currentDate) {
         elem.yearVldMsg.textContent = "Must be in the past";
         return false;
@@ -152,75 +148,15 @@ function isValidYear(day, month, year){
 }
 
 // =============== Calculate Age =============== 
+function calculateAge(day, month, year){
+    const inputDate = new Date(year, month - 1, day);
+    const { years: ageYear = 0, months:ageMonth  = 0, days:ageDay = 0 } = intervalToDuration({ start: inputDate, end: new Date()});
 
-function calculateAge(inputDay, inputMonth, inputYear){
-
-    const pastDate = new Date(inputYear, inputMonth - 1 ,inputDay);
- /*    pastDate.setHours(0, 0, 0, 0);
-
-    // Calculate difference in milliseconds
-    const ageDiffInMilliseconds = currentDate.getTime() - pastDate.getTime();
-
-
-     // Calculate whole years (consider average year length with leap years)
-  const years = Math.floor(ageDiffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
-
-   // Calculate remaining milliseconds after years are removed
-   const remainingTime = ageDiffInMilliseconds % (1000 * 60 * 60 * 24 * 365.25);
-
-   // Calculate whole months (consider 30 days per month on average)
-   const months = Math.floor(remainingTime / (1000 * 60 * 60 * 24 * 30));
- 
-   // Calculate remaining milliseconds after months are removed
-   const remainingDays = remainingTime % (1000 * 60 * 60 * 24 * 30);
- 
-   // Calculate whole days
-   const days = Math.floor(remainingDays / (1000 * 60 * 60 * 24)); */
-
-
-
-    /*
-
-    //compute day, month, year
-    let ageYear = currentDate.getFullYear() - pastDate.getFullYear();
-    let ageMonth = currentDate.getMonth() - pastDate.getMonth();
-    let ageDay = currentDate.getDate() - pastDate.getDate();
-
-    //adjust day, month, age
-    if (ageDay < 0) {
-        ageMonth--;
-        ageDay += new Date(inputYear, inputMonth, 0).getDate();
+    return {
+        year: ageYear,
+        month: ageMonth,
+        day: ageDay
     }
-
-    if (ageMonth < 0) {
-        ageYear--;
-        ageMonth += 12;
-    } 
-    
-    */
-
-    /* const ageYear = differenceInYears(currentDate, pastDate);
-    const ageMonth = differenceInMonths(currentDate, pastDate);
-    const ageDay = differenceInDays(currentDate, pastDate); */
-
-    console.log(pastDate.getFullYear(), pastDate.getMonth(), pastDate.getDate())
-    const currentDate = new Date()
-    console.log(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())
-    const { years = 0, months = 0, days = 0 } = intervalToDuration({ start: pastDate, end: new Date()});
-    console.log(years, months, days)
-
-/*     years = years ? years : 0;
-    months = months ? months : 0;
-    days = days ? days : 0 */
-
-
-
-    //return results
-    return { 
-        year: years, 
-        month: months, 
-        day: days 
-    } 
 }
 
 // ===============Display =============== 
@@ -241,8 +177,6 @@ function displayAge(present){
 function animateCount(from, to, span, key){
     let step = to > from ? 1 : -1;
     let interval = 10;
-
-    console.log(counter[key])
 
     if(counter[key]) {
         clearInterval(counter[key]);
