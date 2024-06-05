@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-DQjEQYWa.png">
+  <title>Age calculator app | Frontend Mentor</title>
+  <script type="module" crossorigin src="/assets/main-BnlJAiMx.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DSndPyxC.css">
+</head>
+
+<body>
+  <main>
+    <article class="card">
+      <form id="myForm">
+
+        <label for="day">
+          Day
+          <input id="day" name="day" type="number" placeholder="DD" min="1" max="31" pattern="[0-9]{1,2}" required>
+          <div class="vld-msg"></div>
+        </label>
+
+        <label for="month">
+          Month
+          <select id="month" name="month" required>
+            <option value="" disabled selected>MM</option>
+            <option value="1" label="Jan.">January</option>
+            <option value="2" label="Feb.">February</option>
+            <option value="3" label="Mar.">March</option>
+            <option value="4" label="Apr.">April</option>
+            <option value="5" label="May.">May</option>
+            <option value="6" label="Jun.">June</option>
+            <option value="7" label="Jul.">July</option>
+            <option value="8" label="Aug.">August</option>
+            <option value="9" label="Sep.">September</option>
+            <option value="10" label="Oct.">October</option>
+            <option value="11" label="Nov.">November</option>
+            <option value="12" label="Dec.">December</option>
+          </select>
+          <div class="vld-msg"></div>
+        </label>
+
+        <label for="year">
+          Year 
+          <input id="year" name="year" type="number" placeholder="YYYY" pattern="[0-9]{4}" min="1800" max="2024" required>
+          <div class="vld-msg"></div>
+        </label>
+      </form>
+
+      <div class="divider">
+        <hr>
+        <button form="myForm"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='46'%20height='44'%20viewBox='0%200%2046%2044'%3e%3cg%20fill='none'%20stroke='%23FFF'%20stroke-width='2'%3e%3cpath%20d='M1%2022.019C8.333%2021.686%2023%2025.616%2023%2044M23%2044V0M45%2022.019C37.667%2021.686%2023%2025.616%2023%2044'/%3e%3c/g%3e%3c/svg%3e" alt="arrow down"></button>
+      </div>
+
+      <section class="results">
+        <p class="years"><span>--</span> years</p>
+        <p class="months"><span>--</span> months</p>
+        <p class="days"><span>--</span> days</p>
+      </section>
+    </article>
+  </main>
+  
+</body>
+</html>
