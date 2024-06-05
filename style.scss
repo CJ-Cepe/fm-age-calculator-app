@@ -37,8 +37,6 @@ $bg-img-1:
     radial-gradient(at 66% 73%, hsla(297,70%,76%,1) 0px, transparent 50%),
     radial-gradient(at 24% 1%, hsla(41,66%,79%,1) 0px, transparent 50%);
 
-
-/* === Simple reset ===*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -67,10 +65,10 @@ body {
     border: 20px;
     @include set-box-shadow();
 
-    max-width: pxToRem(840px); // ====
-    width: 90vw; // ===?
-    padding: pxToRem(40px) #{fluid(20px, 50px)}; // ===?
-    border-radius: pxToRem(22px) pxToRem(22px) #{fluid(100px, 200px)}; // ====
+    max-width: pxToRem(840px);
+    width: 90vw;
+    padding: pxToRem(40px) #{fluid(20px, 50px)};
+    border-radius: pxToRem(22px) pxToRem(22px) #{fluid(100px, 200px)};
     overflow: hidden;
 
     display: flex;
@@ -84,15 +82,15 @@ body {
 
         label {
             color: $smokey-grey;
-            font-size: #{fluid(12px, 13px)}; // ==
+            font-size: #{fluid(12px, 13px)};
             text-transform: uppercase;
-            letter-spacing: pxToRem(4px); // ==
-            max-width: 160px; // ==
+            letter-spacing: pxToRem(4px);
+            max-width: 160px;
             width: 100%;
 
             display: flex;
             flex-direction: column;
-            gap: 0.8em; // ==
+            gap: 0.8em;
 
             &:has(> input:focus),
             &:has(> input:active),
@@ -104,7 +102,7 @@ body {
 
             input, select {
                 background-color: transparent;
-                font-size: #{fluid(18px, 28px)}; // ==
+                font-size: #{fluid(18px, 28px)};
                 width: 100%;
                 border: pxToRem(1px) solid $light-grey;
                 border-radius: 0.3em;
@@ -264,17 +262,3 @@ body {
 		background-position: 0% 100%;
 	}
 }
-
-
-/*
-    - [x] give vldMessage height
-    - [x] adjust option fs
-    - [x] adjust option default color
-    - [x] color red when error
-    - [x] adjust valdiation logic
-    - [x] adjust layout when screen < 200px
-    - [x] adjust leap year computation
-    - [x] adjust validation message for future input
-    - [x] vldMessage style, size, fit
-    - [] clean code
-*/
